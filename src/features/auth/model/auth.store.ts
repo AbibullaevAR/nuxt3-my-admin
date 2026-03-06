@@ -21,6 +21,7 @@ export const useAuthStore = defineStore('auth', () => {
       const { accessToken } = await authApi.login()
 
       tokenCookie.value = accessToken
+      await nextTick(); // так как устанвока куки идет асинхронно то необходимо дождаться когда куки будут установлены
 
       const userStore = useUserStore()
       await userStore.fetchMe()
